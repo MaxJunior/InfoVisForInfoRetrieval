@@ -1,0 +1,107 @@
+<html>
+<head>
+        <meta charset="UTF-8">
+        <!-- <link rel="stylesheet" href="css/bootstrap.min.css"> -->
+
+        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="css/jqcloud.min.css">
+
+</head>
+<body>
+    <div class="containter" style="float:left; width:70vw"> 
+            <h1 class="ff-serif px-2 font-weight-normal text-black card-heading mt-0 mb-1" style="line-height: 2.25; text-align:center">
+                    News Articles Keyphrase extraction 
+            </h1>
+            <hr style="width: 86%;margin-left:100px">
+            <div class="shadow " style="text-align:center;margin-left:100px; background:white; height:50px;width:86%">
+                    <span class="ff-serif" style="font-size: 1.2rem;line-height: 1.2;color:#858796; margin-right:20px">Select a document : </span>
+                    <!-- <div style="background:white; width:90%; margin-right:0; height: 60px; text-align:center; ">  -->
+                    <button type="button" class="btn btn-outline-primary" id="btn0" value="1" style="margin-right:15px;  margin-top:12px">1</button>
+                    <button type="button" class="btn btn-outline-primary" id="btn1" value="2" style="margin-right:15px; margin-top:12px">2</button>
+                    <button type="button" class="btn btn-outline-primary" id="btn2" value="3" style="margin-right:15px; margin-top:12px">3</button>
+                    <button type="button" class="btn btn-outline-primary" id="btn3" value="4" style="margin-right:15px; margin-top:12px">4</button>
+                    <button type="button" class="btn btn-outline-primary" id="btn4" value="5" style="margin-right:15px; margin-top:12px">5</button>
+                    <button type="button" class="btn btn-outline-primary" id="btn5" value="6" style="margin-right:15px;  margin-top:12px">6</button>
+                    <button type="button" class="btn btn-outline-primary" id="btn6" value="7" style="margin-right:15px; margin-top:12px">7</button>
+                    <button type="button" class="btn btn-outline-primary" id="btn7" value="8" style="margin-right:15px; margin-top:12px">8</button>
+                    <button type="button" class="btn btn-outline-primary" id="btn8" value="9" style="margin-right:15px; margin-top:12px">9</button>
+                    <button type="button" class="btn btn-outline-primary" id="btn9" value="10" style=" margin-top:12px">10</button>
+            </div>
+            <br>
+            <br>
+            <!-- <div> -->
+            <div class="shadow" style="width:40%;min-height:70%;background:white;display: inline-block;margin-left:100px" id="wordCloud"> </div>
+            <div class="shadow" style="width:32%;min-height:70%;background:white;display: inline-block;position:absolute; margin-left:10px"   id="top5Keyphrases">
+                  <div style="margin-top:50px;margin-left:15px">
+                    <span class="top5-lst"> Top 5 Keyphrases</span>
+                    <span class="doc-appearence"> Doc Appeareances</span>
+                    <hr style="width: 99%;border-color:white;">
+
+                    <span class="top5-lst" id="rank_0">que</span>
+                    <span class="doc-appearence" id="rank_0_ap"> 1,2,3,4,5,6,7,8,9 </span>
+                    <hr style="width: 99%;border-color:white;">
+                    <span class="top5-lst" id="rank_1">de</span>
+                    <span class="doc-appearence" id="rank_1_ap"> 1,2,3,4,5,6,7,8,9,10</span>
+                    <hr style="width: 99%;border-color:white;">
+                    <span class="top5-lst" id="rank_2"> não</span>
+                    <span class="doc-appearence" id="rank_2_ap"> 1,4,5</span>
+                    <hr style="width: 99%;border-color:white;">
+                    <span class="top5-lst" id="rank_3">regionalização</span>
+                    <span class="doc-appearence" id="rank_3_ap"> 1,8,9</span>
+                    <hr style="width: 99%;border-color:white;">
+                    <span class="top5-lst" id="rank_4">da</span>
+                    <span class="doc-appearence" id="rank_4_ap"> 1,2,4,5,6,7,8,9</span>
+                    </div>
+            </div>
+        <!-- </div> -->
+    </div>
+    <div class="my-2  p-relative bg-white shadow-1 " id="newsContent" style="width: 350px;height:90vh; overflow: hidden;margin-left:30px;margin-top:30px; border-radius:1px;">
+        <img src="img/0.jpg"    
+            class="d-block w-full" style="max-height:200px">
+
+    <div class="px-1 py-1">
+    <!-- <p class="mb-0 small font-weight-medium text-uppercase mb-1 text-muted lts-2px">
+      Travel
+    </p> -->
+
+    <h1 class="ff-serif font-weight-normal text-black card-heading mt-0 mb-1" style="line-height: 1.25;">
+            SNS está com buraco de 469 milhões, muito acima dos 90 milhões previstos
+    </h1>
+
+    <p class="mb-1" style="font-size:14px; max-height:250px;overflow-y:scroll;">
+            O Serviço Nacional de Saúde (SNS) chegou a outubro com um défice de 559,6 milhões de euros. Quer isto dizer que as contas na saúde apresentam agora um buraco na meta anual para 2019, que era um défice de apenas 90 milhões de euros. As contas foram feitas pelo jornal online Eco.
+
+            O orçamento corrente do SNS teve um grande reforço de verbas face a 2018, beneficiando de um aumento nas transferências do Orçamento do Estado de 612 milhões de euros. Com esta injeção de capital, o Governo fez contas para fechar o ano com um défice controlado de 90 milhões de euros.
+            
+            Mas as despesas crescem o dobro do previsto.
+            <br>
+            Até outubro, as contas exibiam já um défice de 469,6 milhões acima da previsão, sendo que ainda se lhe vão juntar mais dois meses de execução até ao final do ano.
+            
+            Os valores que a Direção-Geral do Orçamento divulgou na semana passada mostram que há uma degradação significativa se o compararmos com os primeiros dez meses de 2018, escreve o Eco.
+            <br>
+            No ano passado, quando apresentou o Orçamento do Estado para 2019, o Governo previa que o buraco no SNS fosse de 252 milhões de euros. Mas quando a execução foi divulgada em outubro percebeu-se que o saldo negativo já tinha atingido 375,9 milhões de euros. No final, as contas pararam nos 848 milhões de euros, dizia o relatório e contas do Ministério da Saúde e do SNS, publicado pela Administração Central do Sistema de Saúde.
+            
+            O boletim da Direção-Geral do Orçamento é explícito: o desvio verificado até outubro tem origem na despesa. E a despesa cresceu 6,5% até outubro, em comparação com o ano passado - e que é o dobro do previsto no Orçamento. A receita subiu 4,4% no mesmo período, mas não é suficiente para sanar as contas.
+            <br>
+            A ministra da Saúde Marta Temido demonstra preocupação com a inevitabilidade de um reforço do investimento, mas sublinha que é preciso atentar na "forma como esse investimento adicional venha a ser utilizado".
+            
+            Marta Temido referiu que o trabalho com o Ministério das Finanças para o próximo Orçamento do Estado tem sido "intenso". Mas avisa: "Preocupa-nos muito a gestão eficiente dos impostos de todos, dos dinheiros públicos, e uma luta contínua pela melhoria da eficiência e produtividade do próprio SNS".
+            <br>
+            Já na semana passada, numa interpelação sobre a saúde, marcada a pedido do PSD, a ministra defendeu a necessidade de aumentar a produtividade, perante acusações que juntaram PSD e BE de suborçamentação do SNS.
+            
+            O desempenho de 2018 e o valor do buraco atual já levaram o deputado do PSD Álvaro Almeida a estimar que o défice possa chegar aos mil milhões de euros.</p>
+  </div>
+
+  <!-- <a href="#0" class="text-uppercase d-inline-block font-weight-medium lts-2px ml-2 mb-2 text-center styled-link">
+    Read More
+  </a> -->
+
+</div>
+
+<script type="text/javascript" src="js/jquery.min.js"> </script>
+<script type="text/javascript" src="js/jqcloud.min.js"> </script>
+<script type="text/javascript" src="js/main.js"> </script>
+
+
+</body>
+</html>
