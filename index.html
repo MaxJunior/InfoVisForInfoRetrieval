@@ -28,10 +28,20 @@
                     <button type="button" class="btn btn-outline-primary" id="btn9" value="10" style=" margin-top:12px">10</button>
             </div>
             <br>
-            <br>
+            <!-- <br> -->
+            <div class="shadow " style="margin-left:100px; min-height:8%; background:white; height:50px;width:86%">
+                <span class="ff-serif" style="font-size: 1.2rem;line-height: 1.2;color:#858796; margin-left:20px;margin-top:30px; ">Search Keyphrase : </span>
+                <div autocomplete="off"style="display:inline-block">
+                        <div class="autocomplete" style="width:200px; color:black; display:inline-block">
+                            <input id="myInput" style="margin-top:5px" type="text" name="myCountry" placeholder="Type a Keyphrase ...">
+                        </div>
+                        <input  id="search_key" value="Go">
+                </div>
+                <p id="search_result" style="margin-left:20px;margin-top:15px"></p>
+            </div>
             <!-- <div> -->
-            <div class="shadow" style="width:40%;min-height:70%;background:white;display: inline-block;margin-left:100px" id="wordCloud"> </div>
-            <div class="shadow" style="width:32%;min-height:70%;background:white;display: inline-block;position:absolute; margin-left:10px"   id="top5Keyphrases">
+            <div class="shadow" style="width:40%;min-height:50%;background:white;display: inline-block;margin-left:100px;margin-top:90px" id="wordCloud"> </div>
+            <div class="shadow" style="width:32%;min-height:50%;background:white;display: inline-block;position:absolute; margin-left:10px;margin-top:90px"   id="top5Keyphrases">
                   <div style="margin-top:50px;margin-left:15px">
                     <span class="top5-lst"> Top 5 Keyphrases</span>
                     <span class="doc-appearence"> Doc Appeareances</span>

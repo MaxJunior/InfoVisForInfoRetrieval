@@ -22,15 +22,22 @@ var top25keyphrases = [
       [ {text:"que",weight: 0.008742981751853902},{text:"de",weight: 0.008375382649294067},{text:"em",weight: 0.004400528089592617},{text:"se",weight: 0.0039461588210741175},{text:"na",weight: 0.0035988282390505433},{text:"mais",weight: 0.0031658950204187133},{text:"jos\u00e9",weight: 0.003125848254682476},{text:"jos\u00e9 seguro",weight: 0.003125848254682476},{text:"ant\u00f3nio",weight: 0.0031258482546824753},{text:"ant\u00f3nio jos\u00e9",weight: 0.0031258482546824753},{text:"ant\u00f3nio jos\u00e9 seguro",weight: 0.0031258482546824753},{text:"seguro",weight: 0.0031258482546824753},{text:"da",weight: 0.002983533446004373},{text:"pessoas",weight: 0.002935928714903288},{text:"pessoas que",weight: 0.002935928714903288},{text:"regionaliza\u00e7\u00e3o",weight: 0.002742022571576355},{text:"com",weight: 0.002601714457817845},{text:"partidos",weight: 0.0025564301231332507},{text:"uma",weight: 0.0025390480130890935},{text:"dos",weight: 0.00246584692951799},{text:"das",weight: 0.002461480314040365},{text:"mas",weight: 0.0024600933646041394},{text:"os",weight: 0.0024059053920978883},{text:"quem",weight: 0.002344757324982237},{text:"ex secret\u00e1rio geral",weight: 0.002341483676319292}],
       [{text:"regionaliza\u00e7\u00e3o",weight: 0.008123434932058513},{text:"de",weight: 0.007567404789443667},{text:"para",weight: 0.006652538374762271},{text:"que",weight: 0.006096668524413711},{text:"da",weight: 0.006060776541690921},{text:"ser",weight: 0.005986581636691349},{text:"elei\u00e7\u00e3o",weight: 0.005124156856797934},{text:"esta",weight: 0.005072146650110841},{text:"cec\u00edlia",weight: 0.004544764708632346},{text:"cec\u00edlia meireles",weight: 0.004544764708632346},{text:"comiss\u00f5es",weight: 0.004544764708632346},{text:"comiss\u00f5es de",weight: 0.004544764708632346},{text:"comiss\u00f5es de coordena\u00e7\u00e3o",weight: 0.004544764708632346},{text:"coordena\u00e7\u00e3o",weight: 0.004544764708632345},{text:"elei\u00e7\u00e3o das",weight: 0.004544764708632345},{text:"elei\u00e7\u00e3o das comiss\u00f5es",weight: 0.004544764708632345},{text:"meireles",weight: 0.004544764708632345},{text:"das",weight: 0.004544764708632344},{text:"das comiss\u00f5es",weight: 0.004544764708632344},{text:"das comiss\u00f5es de",weight: 0.004544764708632344},{text:"de coordena\u00e7\u00e3o",weight: 0.004544764708632344},{text:"vai",weight: 0.004544764708632344},{text:"cds",weight: 0.004494839257660105},{text:"esta quarta",weight: 0.004494839257660105},{text:"esta quarta feira",weight: 0.004494839257660105},]]
 
+    //   all_keyphrases = [... new Set(all_keyphrases)];
+var all_keyphrases =  [];
 
+    top25keyphrases.forEach(function(d){
+            d.forEach(function(el){
+                all_keyphrases.push(el.text);
+            })
+    })
+  all_keyphrases = [... new Set(all_keyphrases)];
 
-  
   $('#wordCloud').jQCloud(top25keyphrases[0],{delay: 50});
 
 
 function setNews(btn_nr){
     var html, newHtml;
-    console.log("I am here : ", btn_nr);
+
     html='<img src="img/%id%.jpg" alt="Man with backpack" class="d-block w-full" style="max-height:200px"><div class="px-1 py-1"><h1 class="ff-serif font-weight-normal text-black card-heading mt-0 mb-1" style="line-height: 1.25;">%title%</h1><p class="mb-1" style="font-size:14px; max-height:250px;overflow-y:scroll;"> %description% </p>' 
     
      // Replace the placeholder text with some actual data
@@ -41,11 +48,9 @@ function setNews(btn_nr){
      $('#wordCloud').jQCloud('update', top25keyphrases[btn_nr]);
 
      // update the top 5
-     var topElems = top25keyphrases[btn_nr].slice(0,4);
+     var topElems = top25keyphrases[btn_nr].slice(0,5);
       var top5Elems = topElems.map(d=> d.text); 
-     
-     console.log(topElems);
-     
+
       top5Elems.forEach(function(el,index){
          var str_id  =  "rank_"+ index;
          var str_id_a = str_id + "_ap";
@@ -55,15 +60,18 @@ function setNews(btn_nr){
           document.getElementById(str_id_a).innerHTML = key_word_appeareances(el).join(","); 
      })
      
+     // clean the search box 
+     document.getElementById("search_result").innerHTML ="";
+     document.getElementById("myInput").value="";
 }
 
-
+// function that return the string  whit the documents,number, where the keyphrase
 function key_word_appeareances(key_word){
     var result=[] ;
 
     top25keyphrases.forEach(function(d,i){
         cur_keys = d.map(d=> d.text);
-        console.log("Keys : ", cur_keys);
+        
         if(cur_keys.includes(key_word) ){
             result.push(i+1); 
         }
@@ -71,6 +79,20 @@ function key_word_appeareances(key_word){
     return result;
 }
 
+function search_for_keyphrase(){
+    
+    var search_key = document.getElementById("myInput").value;
+    var key_appear = key_word_appeareances(search_key);
+    var string_result="";
+    console.log("My key.........  :", key_appear);
+    if(key_appear.length == 0){
+        string_result =  "<strong style=\"color:red\">" + search_key + "</strong> :  doesn't appear in any document";
+    }else{
+        string_result =   "<strong style=\"color:green\">" + search_key + "</strong> : appears in document(s) :  " + key_appear.join(",") + ".";
+    }
+    document.getElementById("search_result").innerHTML = string_result;
+}
+// add event listener
 var doc_0_btn = document.getElementById("btn0").addEventListener("click",function(){setNews(0)},false); 
 var doc_1_btn = document.getElementById("btn1").addEventListener("click",function(){setNews(1)},false);
 var doc_2_btn = document.getElementById("btn2").addEventListener("click",function(){setNews(2)},false);
@@ -84,7 +106,114 @@ var doc_9_btn = document.getElementById("btn9").addEventListener("click",functio
 
 
 
+var keyphrase_searc = document.getElementById("search_key").addEventListener("click", function(){search_for_keyphrase() },false);
 
 
+
+// AUTO-COMPLETE FEATURE
+
+ autocomplete(document.getElementById("myInput"), all_keyphrases);
+function autocomplete(inp, arr) {
+    /*the autocomplete function takes two arguments,
+    the text field element and an array of possible autocompleted values:*/
+    var currentFocus;
+    /*execute a function when someone writes in the text field:*/
+    inp.addEventListener("input", function(e) {
+        var a, b, i, val = this.value;
+        /*close any already open lists of autocompleted values*/
+        closeAllLists();
+        if (!val) { return false;}
+        currentFocus = -1;
+        /*create a DIV element that will contain the items (values):*/
+        a = document.createElement("DIV");
+        a.setAttribute("id", this.id + "autocomplete-list");
+        a.setAttribute("class", "autocomplete-items");
+        a.setAttribute("max-height", "70vh");
+        /*append the DIV element as a child of the autocomplete container:*/
+        this.parentNode.appendChild(a);
+        /*for each item in the array...*/
+        var counter = 0;
+        for (i = 0; i < arr.length; i++) {
+          /*check if the item starts with the same letters as the text field value:*/
+          if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+            counter++;
+            if(counter == 6){
+                break;
+            }
+            /*create a DIV element for each matching element:*/
+            b = document.createElement("DIV");
+            /*make the matching letters bold:*/
+            b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
+            b.innerHTML += arr[i].substr(val.length);
+            /*insert a input field that will hold the current array item's value:*/
+            b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
+            /*execute a function when someone clicks on the item value (DIV element):*/
+            b.addEventListener("click", function(e) {
+                /*insert the value for the autocomplete text field:*/
+                inp.value = this.getElementsByTagName("input")[0].value;
+                /*close the list of autocompleted values,
+                (or any other open lists of autocompleted values:*/
+                closeAllLists();
+            });
+            a.appendChild(b);
+          }
+        }
+    });
+    /*execute a function presses a key on the keyboard:*/
+    inp.addEventListener("keydown", function(e) {
+        var x = document.getElementById(this.id + "autocomplete-list");
+        if (x) x = x.getElementsByTagName("div");
+        if (e.keyCode == 40) {
+          /*If the arrow DOWN key is pressed,
+          increase the currentFocus variable:*/
+          currentFocus++;
+          /*and and make the current item more visible:*/
+          addActive(x);
+        } else if (e.keyCode == 38) { //up
+          /*If the arrow UP key is pressed,
+          decrease the currentFocus variable:*/
+          currentFocus--;
+          /*and and make the current item more visible:*/
+          addActive(x);
+        } else if (e.keyCode == 13) {
+          /*If the ENTER key is pressed, prevent the form from being submitted,*/
+          e.preventDefault();
+          if (currentFocus > -1) {
+            /*and simulate a click on the "active" item:*/
+            if (x) x[currentFocus].click();
+          }
+        }
+    });
+    function addActive(x) {
+      /*a function to classify an item as "active":*/
+      if (!x) return false;
+      /*start by removing the "active" class on all items:*/
+      removeActive(x);
+      if (currentFocus >= x.length) currentFocus = 0;
+      if (currentFocus < 0) currentFocus = (x.length - 1);
+      /*add class "autocomplete-active":*/
+      x[currentFocus].classList.add("autocomplete-active");
+    }
+    function removeActive(x) {
+      /*a function to remove the "active" class from all autocomplete items:*/
+      for (var i = 0; i < x.length; i++) {
+        x[i].classList.remove("autocomplete-active");
+      }
+    }
+    function closeAllLists(elmnt) {
+      /*close all autocomplete lists in the document,
+      except the one passed as an argument:*/
+      var x = document.getElementsByClassName("autocomplete-items");
+      for (var i = 0; i < x.length; i++) {
+        if (elmnt != x[i] && elmnt != inp) {
+          x[i].parentNode.removeChild(x[i]);
+        }
+      }
+    }
+    /*execute a function when someone clicks in the document:*/
+    document.addEventListener("click", function (e) {
+        closeAllLists(e.target);
+    });
+  }
 
 
